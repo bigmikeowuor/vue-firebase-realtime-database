@@ -1,0 +1,19 @@
+name: Website Deploy
+on:
+  push:
+    branches: main
+
+jobs:
+  website-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout from repository
+        uses: actions/checkout@master
+
+      - name: Deploy website to Firebase hosting
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

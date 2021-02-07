@@ -1,0 +1,24 @@
+{
+	"name": "mando-chat-room",
+	"version": "1.0.0",
+	"description": "This repository contains the Mando Chat Room source code. The project was created to learn the basics of using Firebase Realtime Database in Vue.js projects. Mando Chat Room is a realtime chat room, and the goal is to make all online users get updates in realtime whenever a message is added, edited or deleted.",
+	"main": "index.html",
+	"scripts": {
+		"dev": "parcel index.html",
+		"build": "parcel build index.html"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bigmikeowuor/vue-firebase-realtime-database.git"
+	},
+	"keywords": [],
+	"author": "Michael Owuor",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/bigmikeowuor/vue-firebase-realtime-database/issues"
+	},
+	"homepage": "https://github.com/bigmikeowuor/vue-firebase-realtime-database#readme",
+	"devDependencies": {
+		"parcel-bundler": "^1.12.4"
+	}
+}
