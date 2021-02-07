@@ -16,6 +16,8 @@ firebase.initializeApp(firebaseConfig);
 // Open connection to the Firebase database
 const database = firebase.database();
 
+const messagesRef = database.ref('messages');
+
 const app = new Vue({
 	el: '#chat',
 
@@ -27,14 +29,12 @@ const app = new Vue({
 
 	methods: {
 		storeMessage() {
-			this.messages.push({ text: this.messageText, nickname: this.nickname });
+			messagesRef.push({ text: this.messageText, nickname: this.nickname });
 			this.messageText = '';
 		},
 	},
 
 	created() {
-		database
-			.ref('messages')
-			.on('child_added', (snapshot) => this.messages.push(snapshot.val()));
+		messagesRef.on('child_added', (snapshot) => this.messages.push(snapshot.val()));
 	},
 });
