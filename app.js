@@ -25,6 +25,7 @@ const app = new Vue({
 		messages: [],
 		messageText: '',
 		nickname: 'gambit',
+		editingMessage: null,
 	},
 
 	methods: {
@@ -35,6 +36,21 @@ const app = new Vue({
 
 		deleteMessage(message) {
 			messagesRef.child(message.id).remove();
+		},
+
+		editMessage(message) {
+			this.editingMessage = message;
+			this.messageText = message.text;
+		},
+
+		cancelEditing() {
+			this.editingMessage = null;
+			this.messageText = '';
+		},
+
+		updateMessage() {
+			messagesRef.child(this.editingMessage.id).update({ text: this.messageText });
+			this.cancelEditing();
 		},
 	},
 
@@ -47,6 +63,13 @@ const app = new Vue({
 			const index = this.messages.indexOf(deleteMessage);
 
 			this.messages.splice(index, 1);
+		});
+		messagesRef.on('child_changed', (snapshot) => {
+			const updatedMessage = this.messages.find(
+				(message) => message.id === snapshot.key
+			);
+
+			updatedMessage.text = snapshot.val().text;
 		});
 	},
 });

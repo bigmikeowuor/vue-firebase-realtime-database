@@ -144,7 +144,8 @@ var app = new Vue({
   data: {
     messages: [],
     messageText: '',
-    nickname: 'gambit'
+    nickname: 'gambit',
+    editingMessage: null
   },
   methods: {
     storeMessage: function storeMessage() {
@@ -156,6 +157,20 @@ var app = new Vue({
     },
     deleteMessage: function deleteMessage(message) {
       messagesRef.child(message.id).remove();
+    },
+    editMessage: function editMessage(message) {
+      this.editingMessage = message;
+      this.messageText = message.text;
+    },
+    cancelEditing: function cancelEditing() {
+      this.editingMessage = null;
+      this.messageText = '';
+    },
+    updateMessage: function updateMessage() {
+      messagesRef.child(this.editingMessage.id).update({
+        text: this.messageText
+      });
+      this.cancelEditing();
     }
   },
   created: function created() {
@@ -174,6 +189,13 @@ var app = new Vue({
       var index = _this.messages.indexOf(deleteMessage);
 
       _this.messages.splice(index, 1);
+    });
+    messagesRef.on('child_changed', function (snapshot) {
+      var updatedMessage = _this.messages.find(function (message) {
+        return message.id === snapshot.key;
+      });
+
+      updatedMessage.text = snapshot.val().text;
     });
   }
 });
