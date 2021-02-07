@@ -118,6 +118,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"app.js":[function(require,module,exports) {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var firebaseConfig = {
   apiKey: 'AIzaSyA2ZnvfQiQ_UQIibcOEKIOZBdcdtxg0SYo',
   authDomain: 'mando-chat-room-mo.firebaseapp.com',
@@ -147,13 +153,27 @@ var app = new Vue({
         nickname: this.nickname
       });
       this.messageText = '';
+    },
+    deleteMessage: function deleteMessage(message) {
+      messagesRef.child(message.id).remove();
     }
   },
   created: function created() {
     var _this = this;
 
     messagesRef.on('child_added', function (snapshot) {
-      return _this.messages.push(snapshot.val());
+      return _this.messages.push(_objectSpread(_objectSpread({}, snapshot.val()), {}, {
+        id: snapshot.key
+      }));
+    });
+    messagesRef.on('child_removed', function (snapshot) {
+      var deleteMessage = _this.messages.find(function (message) {
+        return message.id === snapshot.key;
+      });
+
+      var index = _this.messages.indexOf(deleteMessage);
+
+      _this.messages.splice(index, 1);
     });
   }
 });

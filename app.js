@@ -32,9 +32,21 @@ const app = new Vue({
 			messagesRef.push({ text: this.messageText, nickname: this.nickname });
 			this.messageText = '';
 		},
+
+		deleteMessage(message) {
+			messagesRef.child(message.id).remove();
+		},
 	},
 
 	created() {
-		messagesRef.on('child_added', (snapshot) => this.messages.push(snapshot.val()));
+		messagesRef.on('child_added', (snapshot) =>
+			this.messages.push({ ...snapshot.val(), id: snapshot.key })
+		);
+		messagesRef.on('child_removed', (snapshot) => {
+			const deleteMessage = this.messages.find((message) => message.id === snapshot.key);
+			const index = this.messages.indexOf(deleteMessage);
+
+			this.messages.splice(index, 1);
+		});
 	},
 });
