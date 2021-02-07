@@ -177,9 +177,18 @@ var app = new Vue({
     var _this = this;
 
     messagesRef.on('child_added', function (snapshot) {
-      return _this.messages.push(_objectSpread(_objectSpread({}, snapshot.val()), {}, {
+      _this.messages.push(_objectSpread(_objectSpread({}, snapshot.val()), {}, {
         id: snapshot.key
       }));
+
+      if (snapshot.val().nickname !== _this.nickname) {
+        nativeToast({
+          message: "New message by ".concat(snapshot.val().nickname),
+          position: 'south-east',
+          timeout: 5000,
+          type: 'success'
+        });
+      }
     });
     messagesRef.on('child_removed', function (snapshot) {
       var deleteMessage = _this.messages.find(function (message) {
@@ -189,6 +198,15 @@ var app = new Vue({
       var index = _this.messages.indexOf(deleteMessage);
 
       _this.messages.splice(index, 1);
+
+      if (snapshot.val().nickname !== _this.nickname) {
+        nativeToast({
+          message: "Message deleted by ".concat(snapshot.val().nickname),
+          position: 'south-east',
+          timeout: 5000,
+          type: 'warning'
+        });
+      }
     });
     messagesRef.on('child_changed', function (snapshot) {
       var updatedMessage = _this.messages.find(function (message) {
@@ -196,6 +214,15 @@ var app = new Vue({
       });
 
       updatedMessage.text = snapshot.val().text;
+
+      if (snapshot.val().nickname !== _this.nickname) {
+        nativeToast({
+          message: "Message edited by ".concat(snapshot.val().nickname),
+          position: 'south-east',
+          timeout: 5000,
+          type: 'info'
+        });
+      }
     });
   }
 });

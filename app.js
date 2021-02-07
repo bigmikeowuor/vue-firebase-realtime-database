@@ -55,21 +55,50 @@ const app = new Vue({
 	},
 
 	created() {
-		messagesRef.on('child_added', (snapshot) =>
-			this.messages.push({ ...snapshot.val(), id: snapshot.key })
-		);
+		messagesRef.on('child_added', (snapshot) => {
+			this.messages.push({ ...snapshot.val(), id: snapshot.key });
+
+			if (snapshot.val().nickname !== this.nickname) {
+				nativeToast({
+					message: `New message by ${snapshot.val().nickname}`,
+					position: 'south-east',
+					timeout: 5000,
+					type: 'success',
+				});
+			}
+		});
+
 		messagesRef.on('child_removed', (snapshot) => {
 			const deleteMessage = this.messages.find((message) => message.id === snapshot.key);
 			const index = this.messages.indexOf(deleteMessage);
 
 			this.messages.splice(index, 1);
+
+			if (snapshot.val().nickname !== this.nickname) {
+				nativeToast({
+					message: `Message deleted by ${snapshot.val().nickname}`,
+					position: 'south-east',
+					timeout: 5000,
+					type: 'warning',
+				});
+			}
 		});
+
 		messagesRef.on('child_changed', (snapshot) => {
 			const updatedMessage = this.messages.find(
 				(message) => message.id === snapshot.key
 			);
 
 			updatedMessage.text = snapshot.val().text;
+
+			if (snapshot.val().nickname !== this.nickname) {
+				nativeToast({
+					message: `Message edited by ${snapshot.val().nickname}`,
+					position: 'south-east',
+					timeout: 5000,
+					type: 'info',
+				});
+			}
 		});
 	},
 });

@@ -6,6 +6,7 @@
 		<link rel="icon" href="/favicon.2e70f008.png" type="image/png" sizes="24x24">
 		<title>Mando Chat Room by Michael Owuor</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://unpkg.com/native-toast@2.0.0/dist/native-toast.css">
 	</head>
 	<body>
 		<div id="chat" class="container">
@@ -58,8 +59,11 @@
 		<!-- Firebase products in use -->
 		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
 
-		<!-- Development version of Vue.js, includes helpful console warning -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<!-- production version, optimized for size and speed -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+		<!-- Native-like toast notification but for the web -->
+		<script src="https://unpkg.com/native-toast@2.0.0/dist/native-toast.js"></script>
 
 		<!-- Local JS file -->
 		<script src="/app.c328ef1a.js"></script>
