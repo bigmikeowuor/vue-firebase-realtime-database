@@ -4,14 +4,21 @@ This repository contains the Mando Chat Room source code. The project was create
 
 ## Topics covered
 
-- How to set up and connect to a new Firebase Realtime Database.
-- How to read, write, update and delete data.
-- What it means that Firebase Realtime Database is event driven.
-- How to update a website when changes take place.
-- How to implement notifications when other users make changes.
+1. How to set up and connect to a new Firebase Realtime Database.
+1. How to read, write, update and delete data.
+1. What it means that Firebase Realtime Database is event driven.
+1. How to update a website when changes take place.
+1. How to implement notifications when other users make changes.
+
+## Technologies Used
+
+1. Bootstrap.
+1. Vue.
+1. Firebase Realtime Database.
+1. Firebase Hosting.
 
 ## Live site
 
-The live site can be accessed at [this website][website]...
+The live site can be accessed at the [Mando Chat website][website].
 
 [website]: https://mando-chat.s3.co.ke/

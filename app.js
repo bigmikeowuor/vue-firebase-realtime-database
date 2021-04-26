@@ -1,13 +1,11 @@
 const firebaseConfig = {
-	apiKey: 'AIzaSyA2ZnvfQiQ_UQIibcOEKIOZBdcdtxg0SYo',
-	authDomain: 'mando-chat-room-mo.firebaseapp.com',
-	databaseURL:
-		'https://mando-chat-room-mo-default-rtdb.europe-west1.firebasedatabase.app',
-	projectId: 'mando-chat-room-mo',
-	storageBucket: 'mando-chat-room-mo.appspot.com',
-	messagingSenderId: '924359020779',
-	appId: '1:924359020779:web:c939db93426d081c562eae',
-	measurementId: 'G-NQ848Z5T15',
+	apiKey: 'AIzaSyCMP15zM_DxYst_Xt0mJ8Xym-ojAY42SEs',
+	authDomain: 'mando-chat-swap.firebaseapp.com',
+	databaseURL: 'https://mando-chat-swap-default-rtdb.europe-west1.firebasedatabase.app',
+	projectId: 'mando-chat-swap',
+	storageBucket: 'mando-chat-swap.appspot.com',
+	messagingSenderId: '688900179985',
+	appId: '1:688900179985:web:708c1b443989a55892c9b0',
 };
 
 // Initialize Firebase
@@ -85,9 +83,7 @@ const app = new Vue({
 		});
 
 		messagesRef.on('child_changed', (snapshot) => {
-			const updatedMessage = this.messages.find(
-				(message) => message.id === snapshot.key
-			);
+			const updatedMessage = this.messages.find((message) => message.id === snapshot.key);
 
 			updatedMessage.text = snapshot.val().text;
 
