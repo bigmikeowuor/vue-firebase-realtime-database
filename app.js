@@ -1,11 +1,11 @@
 const firebaseConfig = {
-	apiKey: 'AIzaSyCMP15zM_DxYst_Xt0mJ8Xym-ojAY42SEs',
-	authDomain: 'mando-chat-swap.firebaseapp.com',
-	databaseURL: 'https://mando-chat-swap-default-rtdb.europe-west1.firebasedatabase.app',
-	projectId: 'mando-chat-swap',
-	storageBucket: 'mando-chat-swap.appspot.com',
-	messagingSenderId: '688900179985',
-	appId: '1:688900179985:web:708c1b443989a55892c9b0',
+	apiKey: 'AIzaSyA1ZC3mQKwmTt7RuJMDz1PUE-4pesGYoNo',
+	authDomain: 'mando-chat-wap.firebaseapp.com',
+	databaseURL: 'https://mando-chat-wap-default-rtdb.europe-west1.firebasedatabase.app',
+	projectId: 'mando-chat-wap',
+	storageBucket: 'mando-chat-wap.appspot.com',
+	messagingSenderId: '738197980194',
+	appId: '1:738197980194:web:d7490f00bb8e14a011b67b',
 };
 
 // Initialize Firebase
